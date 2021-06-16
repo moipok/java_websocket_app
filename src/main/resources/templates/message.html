@@ -1,0 +1,28 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <title>Messanger</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css">
+</head>
+<body>
+<div class="container">
+  <header th:insert="blocks/header" :: header></header>
+
+  <div class="container">
+    <div th:each="el : ${mess}">
+      <div th:text="${el.getText()}" />
+    </div>
+    <div class="container mt-5 mb-5">
+      <form method="post">
+        <input type="text" name="text" placeholder="Введите сообщение" class="form-control">
+        <button type="submit" class="btn btn-success">Отправить</button>
+      </form>
+    </div>
+  </div>
+
+  <div th:insert="blocks/footer" :: footer></div>
+</div>
+
+</body>
+</html>
