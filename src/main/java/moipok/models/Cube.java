@@ -19,7 +19,7 @@ public class Cube {
         this.color = color;
     }
 
-    public Cube(Long id, String color, Long posy, Long posx) {
+    public Cube(Long id, String color) {
         this.id = id;
         this.color = color;
     }
