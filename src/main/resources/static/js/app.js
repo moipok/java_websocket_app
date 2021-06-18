@@ -1,28 +1,28 @@
-ws = new WebSocket("ws://localhost:8080/game");
+// ws = new WebSocket("ws://localhost:8080/game");
+//
+// alert("1221");
+//
+// ws.onopen = function () {
+//     alert("conn ok");
+// }
+//
+// ws.onmessage = function (ev)
+// {
+//     changeElem(ev);
+// }
+//
+// function changeElem(ev) {
+//     console.log(ev);
+// }
 
-alert("1221");
 
-ws.onopen = function () {
-    alert("conn ok");
-}
-
-ws.onmessage = function (ev)
-{
-    changeElem(ev);
-}
-
-function changeElem(ev) {
-    console.log(ev);
-}
-
-
-function send_col(id)
-{
-    let m;
-    console.log(id);
-    m = document.getElementById('collor').value;
-    ws.send(id + m);
-}
+// function send_col(id)
+// {
+//     let m;
+//     console.log(id);
+//     m = document.getElementById('collor').value;
+//     ws.send(id + m);
+// }
 
 var stompClient = null;
 
@@ -62,14 +62,29 @@ function sendName() {
     stompClient.send("/app/hello", {}, JSON.stringify({'name': $("#name").val()}));
 }
 
+function send_col(id) {
+    stompClient.send("/app/hello", {}, JSON.stringify({
+        'color': $("#collor").val(),
+        'id' : id
+    }))
+    // stompClient.send("/app/hello", {}, JSON.stringify({'name': $("#name").val()}));
+}
+
 function showGreeting(message) {
-    $("#greetings").append("<tr><td>" + message + "</td></tr>");
+    console.log(message);
+    let arrayOfStrings = message.split("#");
+    let id = arrayOfStrings[0];
+    let color = "#" + arrayOfStrings[1];
+    console.log(id + "    " + color);
+    // $("#greetings").append("<tr><td>" + message + "</td></tr>");
+    document.getElementById(id).style.backgroundColor = color;
 }
 
 $(function () {
     $("form").on('submit', function (e) {
         e.preventDefault();
     });
+    connect();
     $( "#connect" ).click(function() { connect(); });
     $( "#disconnect" ).click(function() { disconnect(); });
     $( "#send" ).click(function() { sendName(); });

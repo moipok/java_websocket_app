@@ -4,6 +4,7 @@ import moipok.models.*;
 import moipok.repository.CubeRepository;
 import moipok.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Sort;
 import org.springframework.messaging.handler.annotation.MessageMapping;
 import org.springframework.messaging.handler.annotation.SendTo;
 import org.springframework.stereotype.Controller;
@@ -26,7 +27,8 @@ public class MainController {
 
     @GetMapping("/home")
     public String home(Model model) {
-        Iterable<Cube> cubes = cubeRepository.findAll();
+        Iterable<Cube> cubes = cubeRepository.findByOrderByIdDesc();
+
         model.addAttribute("cubes", cubes);
         return "home";
     }
@@ -60,9 +62,10 @@ public class MainController {
 
     @MessageMapping("/hello")
     @SendTo("/topic/greetings")
-    public Greeting greeting(HelloMessage message) throws Exception {
-        Thread.sleep(1000); // simulated delay
-        return new Greeting("Hello, " + HtmlUtils.htmlEscape(message.getName()) + "!");
+    public Greeting greeting(Cube message) throws Exception {
+        cubeRepository.save(message);
+        Thread.sleep(50); // simulated delay
+        return new Greeting(HtmlUtils.htmlEscape(message.toString()));
     }
 
 }

@@ -24,6 +24,11 @@ public class Cube {
         this.color = color;
     }
 
+    @Override
+    public String toString() {
+        return id + color;
+    }
+
     public Long getId() {
         return id;
     }
