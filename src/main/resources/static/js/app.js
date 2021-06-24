@@ -1,28 +1,4 @@
-// ws = new WebSocket("ws://localhost:8080/game");
-//
-// alert("1221");
-//
-// ws.onopen = function () {
-//     alert("conn ok");
-// }
-//
-// ws.onmessage = function (ev)
-// {
-//     changeElem(ev);
-// }
-//
-// function changeElem(ev) {
-//     console.log(ev);
-// }
 
-
-// function send_col(id)
-// {
-//     let m;
-//     console.log(id);
-//     m = document.getElementById('collor').value;
-//     ws.send(id + m);
-// }
 
 var stompClient = null;
 

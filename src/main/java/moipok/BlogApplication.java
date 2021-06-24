@@ -3,6 +3,7 @@ package moipok;
 import moipok.controller.MainController;
 import moipok.models.Cube;
 import moipok.repository.CubeRepository;
+import moipok.save.SaveImage;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
@@ -36,6 +37,5 @@ public class BlogApplication implements CommandLineRunner {
 			cubeRepository.save(new Cube((long)(a), "#000000"));
 			a = a + 1;
 		}
-
 	}
 }
